@@ -3,11 +3,11 @@ import './App.css';
 import {connect} from 'react-redux';
 import {User} from '../../src/components/User';
 import {Page} from '../../src/components/Page.js';
-import { setYear } from '../actions/PageActions';
+import { getPhotos } from '../actions/PageActions';
 
 class App extends Component {
   render(){
-    const {user, page, setYearAction} = this.props;
+    const {user, page, getPhotoAction} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -16,7 +16,7 @@ class App extends Component {
         <p className="like">Здесь будут залайканные фото</p>
         <div className="row">
           <User name={user.name}/>
-          <Page photos={page.photos} year={page.year} setYear={setYearAction}/>
+          <Page photos={page.photos} year={page.year} getPhotos={getPhotoAction} isFetching={page.isFetching}/>
         </div>
       </div>
     );
@@ -27,7 +27,6 @@ class App extends Component {
 
 // приклеиваем данные из store
 const mapStateToProps = store => {
-  console.log(store) // посмотрим, что же у нас в store?
   return {
     user: store.user,
     page: store.page
@@ -36,7 +35,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setYearAction: year => dispatch(setYear(year)),
+    getPhotoAction: year => dispatch(getPhotos(year)),
   }
 }
 
