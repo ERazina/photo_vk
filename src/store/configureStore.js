@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
 import {rootReducer} from "./../reducers/rootReducer";
-import {ping} from "./enhancers/ping";
+import logger from 'redux-logger'
 
-export const store = createStore(rootReducer, applyMiddleware(ping));
+export const store = createStore(rootReducer, applyMiddleware(logger));
