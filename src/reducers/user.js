@@ -2,7 +2,7 @@ import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL} from '../actions/UserActions';
 
 export const initialState = {
     name: '',
-    error: '', //
+    error: '',
     isFetching: false
 };
 

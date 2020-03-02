@@ -5,19 +5,27 @@ import {User} from '../../src/components/User';
 import {Page} from '../../src/components/Page.js';
 import { getPhotos } from '../actions/PageActions';
 import {handleLogin} from '../actions/UserActions';
+import {makeYearPhotos} from '../actions/PageActions';
+import {getMorePhotos} from '../actions/PageActions';
 
 class App extends Component {
   render(){
-    const {user, page, getPhotoAction, handleLoginAction} = this.props;
+    const {user, page, getPhotoAction, handleLoginAction, makeYearPhotosAction, getMorePhotosAction} = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <h1>Мой топ фото</h1>
         </header>
-        <p className="like">Здесь будут залайканные фото</p>
         <div className="row">
           <User handleLogin={handleLoginAction} name={user.name} error={user.error}/>
-          <Page photos={page.photos} year={page.year} getPhotos={getPhotoAction} isFetching={page.isFetching}/>
+          <Page 
+            photos={page.photos} 
+            year={page.year} 
+            getPhotos={getPhotoAction}
+            isFetching={page.isFetching} 
+            makeYearPhotos={makeYearPhotosAction}
+            // getMorePhotos={getMorePhotosAction}
+            />
         </div>
       </div>
     );
@@ -37,7 +45,9 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getPhotoAction: year => dispatch(getPhotos(year)),
-    handleLoginAction: () => dispatch(handleLogin())
+    handleLoginAction: () => dispatch(handleLogin()),
+    makeYearPhotosAction: (photos, selectedYear) => dispatch(makeYearPhotos(photos, selectedYear)), 
+    getMorePhotosAction: (offset, count, year, dispatch) => dispatch(getMorePhotos(offset, count, year, dispatch))
   }
 }
 
