@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import {User} from '../../src/components/User';
 import {Page} from '../../src/components/Page.js';
 import { getPhotos } from '../actions/PageActions';
+import {handleLogin} from '../actions/UserActions';
 
 class App extends Component {
   render(){
-    const {user, page, getPhotoAction} = this.props;
+    const {user, page, getPhotoAction, handleLoginAction} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -15,7 +16,7 @@ class App extends Component {
         </header>
         <p className="like">Здесь будут залайканные фото</p>
         <div className="row">
-          <User name={user.name}/>
+          <User handleLogin={handleLoginAction} name={user.name} error={user.error}/>
           <Page photos={page.photos} year={page.year} getPhotos={getPhotoAction} isFetching={page.isFetching}/>
         </div>
       </div>
@@ -36,6 +37,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getPhotoAction: year => dispatch(getPhotos(year)),
+    handleLoginAction: () => dispatch(handleLogin())
   }
 }
 
