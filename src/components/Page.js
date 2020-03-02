@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import './page.css';
 
 export class Page extends Component {
     onBtnClick = e => {
@@ -26,7 +27,7 @@ export class Page extends Component {
         <p>У тебя {isFetching ? "loading..." : photos.length} фото за {year} год</p>
         {photos.length !== 0 ?
           photos.map((element, index) => 
-            <div key={index}>
+            <div key={index} className="page-flex">
               <img src={element.sizes[0].url}></img>
               <p>{element.likes.count}</p>
             </div>
